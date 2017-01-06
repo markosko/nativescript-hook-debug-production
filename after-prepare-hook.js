@@ -28,9 +28,9 @@ module.exports = function (logger, platformsData, projectData, hookArgs) {
 	}
 
 	var keepFiles="debug";
-	var deleteFiles="release";
+	var deleteFiles="production";
 	if(release){
-		keepFiles="release";
+		keepFiles="production";
 		deleteFiles="debug";
 	}
 	

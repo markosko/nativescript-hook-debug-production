@@ -1,5 +1,5 @@
 # NativeScript-hook-debug-production
-Hook for selecting files based on debug or production build
+Hook for selecting files based on debug or production build for NativeScript Apps
 
 
 ## License

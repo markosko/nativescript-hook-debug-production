@@ -1,0 +1,56 @@
+{
+  "name": "nativescript-hook-debug-production",
+  "version": "1.0.0",
+  "description": "Hook for selecting files based on debug or production build",
+  "main": "index.js",
+  "nativescript": {
+    "hooks": [
+      {
+        "type": "after-prepare",
+        "script": "after-prepare-hook.js",
+        "inject": true
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/markosko/nativescript-hook-debug-production.git"
+  },
+  "keywords": [
+    "NativeScript",
+    "nativescript-hook-debug-production",
+    "nativescript",
+    "nativescript-hook",
+    "shrinking"
+  ],
+  "author": {
+    "name": "Marek Maszay",
+    "email": "markosko.mm@gmail.com",
+    "url": "https://github.com/markosko"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/markosko/nativescript-hook-debug-production/blob/master/LICENSE"
+  },
+  "bugs": {
+    "url": "https://github.com/markosko/nativescript-hook-debug-production/issues"
+  },
+  "homepage": "https://github.com/markosko/nativescript-hook-debug-production",
+  "readmeFilename": "README.md",
+  "scripts": {
+    "demo.ios": "npm run preparedemo && cd demo && tns emulate ios",
+    "demo.android": "npm run preparedemo && cd demo && tns run android",
+    "debug.ios": "npm run preparedemo && cd demo && tns debug ios --emulator",
+    "debug.android": "npm run preparedemo && cd demo && tns debug android --emulator",
+    "preparedemo": "cd demo && tns plugin remove nativescript-hook-debug-production && tns plugin add .. && tns install",
+    "resetdemo": "cd demo && tns plugin remove nativescript-hook-debug-production && tns plugin add .. && tns prepare android && cd ..",
+    "afterprepare":"cd demo && tns prepare android && cd ..",
+    "setup": "cd demo && npm install && tns plugin add .. && cd ..",
+    "start": "npm run demo.android",
+    "postinstall": "node postinstall.js",
+    "preuninstall": "node preuninstall.js"
+  },
+  "dependencies": {
+    "nativescript-hook": "^0.2.1"
+  }
+}

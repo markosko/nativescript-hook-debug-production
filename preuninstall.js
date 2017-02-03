@@ -1,2 +1,1 @@
-var hook = require('nativescript-hook')(__dirname);
-hook.preuninstall();
+require('nativescript-hook')(__dirname).preuninstall();

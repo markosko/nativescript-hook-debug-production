@@ -13,16 +13,22 @@ module.exports = function (logger, platformsData, projectData, hookArgs) {
 		var platformAppDir = path.join(platformOutDir, "app");
 
 		try{
-			if( hookArgs.$arguments.length == 1 ){
+			if('production' in projectData.$options.argv){
+				release = projectData.$options.argv.production;
+			}
+			else if( hookArgs.$arguments.length == 1 && 'release' in projectData.$options.argv){
 				release = projectData.$options.argv.release;
 				
-			}else{
+			}else if('release' in hookArgs.$arguments[1].prepareInfo){
 				
 				release = hookArgs.$arguments[1].prepareInfo.release;
+			}else{
+				logger.error("Cannot resolve build type");
+				reject("Cannot resolve build type");	
 			}
 		}catch(e){
 			logger.error("Cannot resolve build type");
-			reject(err);
+			reject(e);
 		}
 		logger.write("\nPlatform: " + platform +", Production mode: " + release + "\n");
 

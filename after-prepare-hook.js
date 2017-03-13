@@ -80,7 +80,7 @@ var processFiles = function(dir,file,toKeep,toDelete,logger){
 		}
 	}else if(file.indexOf( "." + toDelete + "." ) > -1){
 		try{
-			fs.ulinkSync(path.join(dir , file));
+			fs.unlinkSync(path.join(dir , file));
 		}catch(e){
 			logger.warn(e);
 		}

@@ -40,7 +40,7 @@ module.exports = function (logger, platformsData, projectData, hookArgs) {
 		}
 		
 		try{
-			walkSync(platformAppDir,keepFiles,deleteFiles);
+			walkSync(platformAppDir,keepFiles,deleteFiles,logger);
 		}catch(e){
 			logger.warn(e);
 			logger.warn('Debug/Production hook failed while traversing and processing \'App folder\'.');
@@ -52,23 +52,23 @@ module.exports = function (logger, platformsData, projectData, hookArgs) {
 };
 
 
-var walkSync = function(dir,toKeep,toDelete) {
+var walkSync = function(dir,toKeep,toDelete,logger) {
     var fs = fs || require('fs'),
         files = fs.readdirSync(dir);
     files.forEach(function(file) {
 		if(file === "tns_modules") return;
 		else if (fs.statSync(path.join(dir , file)).isDirectory()) {
-			walkSync(path.join(dir , file),toKeep,toDelete);
-        }
-        else { 
-			processFiles(dir,file,toKeep,toDelete);
+			walkSync(path.join(dir , file),toKeep,toDelete,logger);
+        	}
+        	else { 
+			processFiles(dir,file,toKeep,toDelete,logger);
 		}
     });
 
 };
 
 
-var processFiles = function(dir,file,toKeep,toDelete){
+var processFiles = function(dir,file,toKeep,toDelete,logger){
 	if(file.indexOf("." + toKeep + "." ) > -1){
 		try{
 			fs.unlinkSync(path.join(dir , file).replace("." + toKeep + ".","."))

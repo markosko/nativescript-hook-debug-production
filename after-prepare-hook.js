@@ -72,9 +72,7 @@ var processFiles = function(dir,file,toKeep,toDelete,logger){
 	if(file.indexOf("." + toKeep + "." ) > -1){
 		try{
 			fs.unlinkSync(path.join(dir , file).replace("." + toKeep + ".","."))
-			fs.rename(path.join(dir , file),path.join(dir , file).replace("." + toKeep + ".","."), function(err) {
-				if ( err ) logger.warn('ERROR: ' + err);
-			});
+			fs.renameSync(path.join(dir , file),path.join(dir , file).replace("." + toKeep + ".","."));
 		}catch(e){
 			logger.warn(e);
 		}

@@ -24,14 +24,15 @@ module.exports = function (logger, platformsData, projectData, hookArgs) {
 			) {
 				release = projectData.$options.argv.release;
 			} else if (
-				hookArgs.$arguments.length == 1 && 
+				hookArgs.$arguments.length >= 1 &&
+				hookArgs.$arguments[1].prepareInfo &&
 				hookArgs.$arguments[1].prepareInfo.release && 
 				hookArgs.$arguments[1].prepareInfo.release === true
 			) {
 				release = hookArgs.$arguments[1].prepareInfo.release;
 			} else {
-				logger.error("Cannot resolve build type");
-				reject("Cannot resolve build type");
+				release = false;
+				logger.error("Cannot resolve build type defaulting to false");
 			}
 		}catch(e){
 			logger.error("Cannot resolve build type");

@@ -79,14 +79,13 @@ var walkSync = function(dir,toKeep,toDelete,logger) {
 var processFiles = function(dir,file,toKeep,toDelete,logger){
 	if(file.indexOf("." + toKeep + "." ) > -1){
 		try{
-			fs.unlinkSync(path.join(dir , file).replace("." + toKeep + ".","."))
+			fs.unlinkSync(path.join(dir , file).replace("." + toKeep + ".","."));
 		}
 		catch(e){
 			logger.warn(e);			
 		}		
 		try{
 			fs.renameSync(path.join(dir , file),path.join(dir , file).replace("." + toKeep + ".","."));
-		}
 		}catch(e){
 			logger.warn(e);
 		}
